@@ -9,6 +9,6 @@
 # 如何启动项目
 ```sh
 npm i
-webpack
+npm run build
 ```
 在 examples 各个子文件夹内会生成 bundle.js 文件，打开 index.html 便能运行例子。
