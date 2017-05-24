@@ -1,0 +1,24 @@
+{
+  "name": "fake-preact",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youngwind/fake-preact.git"
+  },
+  "author": "youngwind",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/youngwind/fake-preact/issues"
+  },
+  "homepage": "https://github.com/youngwind/fake-preact#readme",
+  "dependencies": {
+    "babel-core": "^5.8.38",
+    "babel-loader": "^5.4.2",
+    "webpack": "^2.6.0"
+  }
+}
