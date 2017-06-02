@@ -1,7 +1,8 @@
 const path = require('path');
 module.exports = {
     entry: {
-        'examples/basic/bundle': './examples/basic/index.js'
+        'examples/basic/bundle': './examples/basic/index.js',
+        'examples/component/bundle': './examples/component/index.js'
     },
     output: {
         path: path.resolve(__dirname),
