@@ -44,7 +44,7 @@ function build(vNode, dom) {
     if (typeof vNode === 'string' || typeof vNode === 'number') {
         if (dom) {
             if (dom.nodeType === 3) {
-                if(vNode !== dom.textContent) {
+                if (vNode !== dom.textContent) {
                     dom.textContent = vNode;
                 }
                 return dom;
@@ -66,10 +66,6 @@ function build(vNode, dom) {
         if (!dom) {
             out = document.createElement(nodeName);
         }
-        let children;
-        if (out && out.childNodes) {
-            children = Array.from(out.childNodes);  // 获取旧 dom 的子节点集合
-        }
 
         // 处理节点的属性（包括事件绑定）
         if (attrs) {
@@ -80,7 +76,11 @@ function build(vNode, dom) {
         }
 
         // 遍历 vNode.children，逐个地递归调用 build 函数，生成新 DOM
-        let newChildren = [];
+        let children, newChildren = [];
+        if (out && out.childNodes) {
+            children = Array.from(out.childNodes);  // 获取旧 dom 的子节点集合
+        }
+
         if (vChildren && vChildren.length) {
             vChildren.forEach((vchild, i) => {
                 let child = children[i];
@@ -88,7 +88,7 @@ function build(vNode, dom) {
             });
         }
 
-        // 首次渲染适用于这里的情况
+        // 判断新子节点是否已经存在原有 DOM 中
         newChildren.forEach((newChild, i) => {
             if (children[i] !== newChild) {
                 out.appendChild(newChild);
@@ -105,29 +105,14 @@ function build(vNode, dom) {
  * @returns {*}
  */
 function buildComponentFromVNode(vNode, dom) {
-    if (dom && dom._component) {
-        setComponentProps(dom._component, getNodeProps(vNode));
-        renderComponent(dom._component); /* 在设置 props 之后重新渲染组件 */
-    } else {
-        dom = createComponentFromVNode(vNode);
-    }
-    return dom;
-}
-
-/**
- * 由 vNode 生成 base 真实 DOM；
- * 注意与 buildComponentFromVNode 的区别
- * @param vNode
- * @returns {DOM|*}
- */
-function createComponentFromVNode(vNode) {
-    let component = new vNode.nodeName();
+    let component = dom && dom._component || new vNode.nodeName();
     let props = getNodeProps(vNode);
+
     setComponentProps(component, props);
     renderComponent(component);
+
     return component.base;
 }
-
 
 /**
  * 组件渲染主体逻辑

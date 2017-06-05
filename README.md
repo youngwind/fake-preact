@@ -3,7 +3,7 @@
 
 # 已实现功能
 - [x] 解析 JSX，一次性渲染到页面中，详见 examples/basic
-- [ ] extend Component
+- [x] extend Component
 - [ ] vDOM diff
 
 # 如何启动项目
